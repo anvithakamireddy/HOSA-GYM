@@ -1,0 +1,569 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOSA GYM</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+body {
+    background: #101311;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* PHONE FRAME */
+
+.phone {
+    width: 100%;
+    max-width: 430px;
+    height: 900px;
+    max-height: 96vh;
+    min-height: 600px;
+    border-radius: 42px;
+    overflow: hidden;
+    position: relative;
+    background: #18231e;
+    box-shadow: 0 25px 90px #000a;
+    border: 5px solid #333936;
+}
+
+/* LOCKSCREEN */
+
+#lockscreen {
+    position: absolute;
+    inset: 0;
+    padding: 18px 22px;
+    background:
+    linear-gradient(180deg, #101d20aa, #101311cc),
+    url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1000")
+    center/cover;
+    z-index: 2;
+    transition: opacity .5s;
+}
+
+.statusbar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 3px;
+}
+
+.status-icons {
+    letter-spacing: 3px;
+}
+
+.clock {
+    text-align: center;
+    margin-top: 75px;
+}
+
+.date {
+    font-size: 19px;
+    color: #eee;
+    margin-bottom: 5px;
+}
+
+.time {
+    font-size: 86px;
+    font-weight: 300;
+    letter-spacing: -5px;
+    line-height: 1.1;
+}
+
+.weather {
+    text-align: center;
+    font-size: 13px;
+    color: #e2e9e5;
+    margin-top: 12px;
+}
+
+/* NOTIFICATION */
+
+.notification {
+    margin-top: 90px;
+    padding: 19px;
+    border-radius: 22px;
+    background: rgba(30,35,34,.76);
+    backdrop-filter: blur(25px);
+    border: 1px solid #ffffff30;
+    cursor: pointer;
+    box-shadow: 0 10px 30px #0004;
+    animation: appear .8s ease-out;
+    transition: .25s;
+}
+
+.notification:active {
+    transform: scale(.97);
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.notif-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 13px;
+}
+
+.app-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: linear-gradient(135deg,#d5f3df,#639e79);
+    color: #163c27;
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.app-name {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.notif-time {
+    margin-left: auto;
+    font-size: 11px;
+    color: #bbb;
+}
+
+.notification h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.notification p {
+    font-size: 14px;
+    line-height: 1.45;
+    color: #dedede;
+}
+
+.swipe {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 125px;
+    height: 5px;
+    border-radius: 10px;
+    background: white;
+}
+
+/* APP SCREEN */
+
+.app-screen {
+    position: absolute;
+    inset: 0;
+    padding: 30px 25px;
+    background:
+    radial-gradient(ellipse at 80% 0%, #344d3c 0%, transparent 50%),
+    #101713;
+    display: none;
+    overflow-y: auto;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+    margin-bottom: 65px;
+}
+
+.logo {
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #a7dfb6;
+}
+
+.member {
+    font-size: 11px;
+    color: #9ba99f;
+    letter-spacing: 1px;
+}
+
+.tag {
+    font-size: 11px;
+    color: #a7dfb6;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.app-screen h1 {
+    font-size: 43px;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    font-size: 15px;
+    color: #aab6ad;
+    line-height: 1.7;
+    margin-bottom: 35px;
+}
+
+.membership-card {
+    background: linear-gradient(145deg,#25382c,#19251e);
+    border: 1px solid #526a57;
+    border-radius: 20px;
+    padding: 23px;
+    margin-bottom: 25px;
+}
+
+.card-label {
+    font-size: 11px;
+    color: #9dac9f;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.card-value {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.active {
+    color: #a7dfb6;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.question {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.description {
+    color: #aab6ad;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+button {
+    width: 100%;
+    padding: 18px;
+    border-radius: 13px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.cancel {
+    border: none;
+    background: #d75b54;
+    color: white;
+    box-shadow: 0 6px 20px #d75b5430;
+}
+
+.cancel:hover {
+    background: #eb6c63;
+}
+
+.back {
+    margin-top: 12px;
+    background: transparent;
+    color: #b5c1b8;
+    border: 1px solid #526057;
+}
+
+/* SUCCESS SCREEN */
+
+#success {
+    text-align: center;
+    padding-top: 170px;
+}
+
+.check {
+    width: 85px;
+    height: 85px;
+    margin: 0 auto 35px;
+    border: 2px solid #a7dfb6;
+    color: #a7dfb6;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 40px;
+    animation: pop .5s ease;
+}
+
+@keyframes pop {
+    0% { transform: scale(.3); opacity: 0; }
+    70% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+#success h1 {
+    font-size: 36px;
+}
+
+#success .subtitle {
+    margin-top: 20px;
+}
+
+.home-indicator {
+    position: absolute;
+    bottom: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 5px;
+    background: white;
+    border-radius: 10px;
+    z-index: 5;
+}
+
+/* SMALL SCREENS */
+
+@media(max-width:500px) {
+    body {
+        display: block;
+        background: #101713;
+    }
+
+    .phone {
+        max-width: none;
+        width: 100%;
+        height: 100dvh;
+        max-height: none;
+        min-height: 0;
+        border: none;
+        border-radius: 0;
+    }
+
+    .clock {
+        margin-top: 90px;
+    }
+
+    .notification {
+        margin-top: 105px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+    <!-- IPHONE LOCK SCREEN -->
+
+    <div id="lockscreen">
+
+        <div class="statusbar">
+            <span>AT&T</span>
+            <span class="status-icons">● ◉ ▰</span>
+        </div>
+
+        <div class="clock">
+            <div class="date" id="date">Sunday, November 22</div>
+            <div class="time" id="time">11:46</div>
+        </div>
+
+        <div class="weather">Your day is waiting for you.</div>
+
+        <div class="notification" onclick="openApp()">
+
+            <div class="notif-header">
+
+                <div class="app-icon">H</div>
+
+                <div class="app-name">HOSA GYM</div>
+
+                <div class="notif-time">now</div>
+
+            </div>
+
+            <h3>We miss you!</h3>
+
+            <p>
+                It's been a while since you've gone to the gym.
+                Are you sure you still want to keep your membership?
+            </p>
+
+        </div>
+
+        <div class="swipe"></div>
+
+    </div>
+
+
+    <!-- MEMBERSHIP APP -->
+
+    <div class="app-screen" id="app">
+
+        <div class="app-header">
+            <div class="logo">HOSA<span>.</span>GYM</div>
+            <div class="member">MEMBER PORTAL</div>
+        </div>
+
+        <div id="membership">
+
+            <div class="tag">MEMBERSHIP NOTIFICATION</div>
+
+            <h1>Before you go...</h1>
+
+            <p class="subtitle">
+                We noticed you haven't visited us in a while.
+                We'd hate to see you leave!
+            </p>
+
+            <div class="membership-card">
+
+                <div class="card-label">YOUR MEMBERSHIP</div>
+
+                <div class="card-value">HOSA GYM</div>
+
+                <div class="active">● &nbsp; Active Membership</div>
+
+            </div>
+
+            <div class="question">
+                Would you like to cancel your membership?
+            </div>
+
+            <p class="description">
+                If you continue, your membership will be marked
+                as cancelled. We're sorry to see you go.
+            </p>
+
+            <button class="cancel" onclick="cancelMembership()">
+                YES, CANCEL MY MEMBERSHIP
+            </button>
+
+            <button class="back" onclick="goBack()">
+                KEEP MY MEMBERSHIP
+            </button>
+
+        </div>
+
+
+        <!-- SUCCESS -->
+
+        <div id="success" style="display:none">
+
+            <div class="check">✓</div>
+
+            <div class="tag">CONFIRMATION</div>
+
+            <h1>You're all set.</h1>
+
+            <p class="subtitle">
+                Your HOSA GYM membership has been
+                successfully cancelled.
+
+                Thank you for being a member.
+                We hope to see you again!
+            </p>
+
+            <button class="back" onclick="location.reload()">
+                RETURN TO HOME SCREEN
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="home-indicator"></div>
+
+</div>
+
+
+<script>
+
+// Real-time clock
+function updateClock() {
+    const now = new Date();
+
+    document.getElementById("time").textContent =
+        now.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: false
+        });
+
+    document.getElementById("date").textContent =
+        now.toLocaleDateString("en-US", {
+            weekday: "long",
+            month: "long",
+            day: "numeric"
+        });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+
+// Open HOSA GYM when notification is tapped
+function openApp() {
+
+    document.getElementById("lockscreen").style.opacity = "0";
+
+    setTimeout(() => {
+        document.getElementById("lockscreen").style.display = "none";
+        document.getElementById("app").style.display = "block";
+    }, 450);
+
+}
+
+
+// Cancel membership
+function cancelMembership() {
+
+    document.getElementById("membership").style.display = "none";
+
+    document.getElementById("success").style.display = "block";
+
+}
+
+
+// Keep membership
+function goBack() {
+
+    document.getElementById("app").style.display = "none";
+
+    document.getElementById("lockscreen").style.display = "block";
+
+    setTimeout(() => {
+        document.getElementById("lockscreen").style.opacity = "1";
+    }, 20);
+
+}
+
+</script>
+
+</body>
+</html>
